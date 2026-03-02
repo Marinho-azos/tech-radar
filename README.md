@@ -12,10 +12,6 @@ A library that generates an interactive radar, inspired by [thoughtworks.com/rad
 
 You can see this in action at https://radar.thoughtworks.com. If you plug in [this data](https://docs.google.com/spreadsheets/d/1GBX3-jzlGkiKpYHF9RvVtu6GxSrco5OYTBv9YsOTXVg/edit#gid=0) you'll see [this visualization](https://radar.thoughtworks.com/?sheetId=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1GBX3-jzlGkiKpYHF9RvVtu6GxSrco5OYTBv9YsOTXVg%2Fedit%23gid%3D0).
 
-## Disclaimer
-
-The fourth ring name has been changed from **Hold** to **Caution**. Data using the ring value "hold" (any case) in your sheet, CSV, or JSON is still accepted and displayed as **Caution**.
-
 ## How To Use
 
 The easiest way to use the app out of the box is to provide a _public_ Google Sheet ID from which all the data will be fetched. You can enter that ID into the input field and your radar will be generated once you click the submit button. The data must conform to the format below for the radar to be generated correctly.
@@ -133,6 +129,10 @@ That's it!
 For a self hosted BYOR app, there is no such condition on the names. Instructions to specify custom names are in the [next section](#more-complex-usage).
 
 Check [this page](https://www.thoughtworks.com/radar/byor) for step by step guidance.
+
+## Disclaimer
+
+The fourth ring name has been changed from **Hold** to **Caution** in the recent release. Data using the ring value "hold" (any case) in your sheet, CSV, or JSON is still accepted and displayed as **Caution**.
 
 ### More complex usage
 
