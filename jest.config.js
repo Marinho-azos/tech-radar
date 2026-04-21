@@ -3,7 +3,8 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.js'],
   testEnvironment: 'jsdom',
   testEnvironmentOptions: {
-    url: 'https://thoughtworks.com/radar',
+    // Same origin as urlUtils tests so `history.replaceState` can set location without SecurityError.
+    url: 'https://thoughtworks.com/',
   },
   transform: {
     '^.+\\.[jt]sx?$': 'babel-jest',
