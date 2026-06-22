@@ -15,6 +15,7 @@ server {
   location ~ /files/ {
     root /opt/build-your-own-radar;
     autoindex on;
+    index index.html;
     default_type text/plain;
     add_header 'Access-Control-Allow-Origin' '*';
   }

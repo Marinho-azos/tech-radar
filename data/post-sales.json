@@ -1,0 +1,118 @@
+[
+  {
+    "name": "Gainsight (Customer Success Platform)",
+    "ring": "adote",
+    "quadrant": "ferramentas",
+    "isNew": "FALSE",
+    "status": "No Change",
+    "description": "Central CS platform for health scoring, automated workflows, playbooks, and customer lifecycle management."
+  },
+  {
+    "name": "Automated Onboarding Flows",
+    "ring": "adote",
+    "quadrant": "técnicas",
+    "isNew": "FALSE",
+    "status": "Moved In",
+    "previousRing": "teste",
+    "links": [
+      { "label": "ADR-028", "url": "https://github.com/azos/architecture/blob/main/adr/028-onboarding-flows.md" },
+      { "label": "RFC", "url": "https://github.com/azos/rfcs/blob/main/onboarding-automation.md" },
+      { "label": "Resultados", "url": "https://docs.google.com/spreadsheets/d/abc123" }
+    ],
+    "description": "Sequential, trigger-based onboarding emails and in-app guidance that activate users within the first 14 days."
+  },
+  {
+    "name": "NPS Survey Automation",
+    "ring": "adote",
+    "quadrant": "ferramentas",
+    "isNew": "FALSE",
+    "links": [
+      { "label": "ADR-016", "url": "https://github.com/azos/architecture/blob/main/adr/016-nps-automation.md" }
+    ],
+    "description": "Automated NPS collection at key lifecycle milestones with real-time alerts for detractors."
+  },
+  {
+    "name": "Zendesk AI Agents",
+    "ring": "teste",
+    "quadrant": "ferramentas",
+    "isNew": "TRUE",
+    "links": [
+      { "label": "RFC", "url": "https://github.com/azos/rfcs/blob/main/zendesk-ai-agents.md" },
+      { "label": "Discussão", "url": "https://github.com/azos/engineering/discussions/378" }
+    ],
+    "description": "AI-powered chatbots and agent assist features within Zendesk to reduce first response time and deflect common tickets."
+  },
+  {
+    "name": "Customer Health Score Model",
+    "ring": "adote",
+    "quadrant": "técnicas",
+    "isNew": "FALSE",
+    "status": "No Change",
+    "description": "Predictive health scoring based on product usage, support tickets, NPS, and account data to flag at-risk accounts."
+  },
+  {
+    "name": "ChurnZero",
+    "ring": "avalie",
+    "quadrant": "ferramentas",
+    "isNew": "TRUE",
+    "description": "Real-time customer success platform with in-app messaging, usage monitoring, and automated retention campaigns."
+  },
+  {
+    "name": "Customer Communities (Vanilla Forums)",
+    "ring": "teste",
+    "quadrant": "plataformas",
+    "isNew": "FALSE",
+    "description": "Community platform for customers to share best practices, vote on features, and find answers peer-to-peer."
+  },
+  {
+    "name": "Expansion Revenue Analytics",
+    "ring": "teste",
+    "quadrant": "técnicas",
+    "isNew": "FALSE",
+    "status": "Moved In",
+    "previousRing": "avalie",
+    "links": [
+      { "label": "ADR-033", "url": "https://github.com/azos/architecture/blob/main/adr/033-expansion-revenue.md" }
+    ],
+    "description": "Framework for identifying upsell and cross-sell opportunities based on usage patterns and account demographics."
+  },
+  {
+    "name": "Intercom (Messaging Platform)",
+    "ring": "cuidado",
+    "quadrant": "ferramentas",
+    "isNew": "FALSE",
+    "status": "Moved Out",
+    "previousRing": "adote",
+    "links": [
+      { "label": "ADR-038", "url": "https://github.com/azos/architecture/blob/main/adr/038-migrate-from-intercom.md" },
+      { "label": "Discussão", "url": "https://github.com/azos/engineering/discussions/425" },
+      { "label": "RFC", "url": "https://github.com/azos/rfcs/blob/main/intercom-migration.md" },
+      { "label": "Checklist", "url": "https://github.com/azos/engineering/wiki/Intercom-Migration-Checklist" }
+    ],
+    "description": "Moving away from Intercom in favor of Zendesk for unified support. Existing automation needs to be migrated."
+  },
+  {
+    "name": "Product-Led Expansion",
+    "ring": "avalie",
+    "quadrant": "técnicas",
+    "isNew": "TRUE",
+    "description": "Letting product usage naturally drive upgrades and expansion through feature gating, usage-based pricing, and in-app upgrade flows."
+  },
+  {
+    "name": "API for Customer Health Data",
+    "ring": "adote",
+    "quadrant": "plataformas",
+    "isNew": "FALSE",
+    "links": [
+      { "label": "ADR-020", "url": "https://github.com/azos/architecture/blob/main/adr/020-health-api.md" }
+    ],
+    "description": "GraphQL API exposing customer health scores, usage metrics, and risk flags to internal tools and dashboards."
+  },
+  {
+    "name": "Renewal Forecasting (ML)",
+    "ring": "teste",
+    "quadrant": "técnicas",
+    "isNew": "FALSE",
+    "description": "Machine learning model predicting renewal probability per account, fed into Gainsight for proactive CS intervention."
+  }
+]

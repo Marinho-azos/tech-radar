@@ -1,0 +1,126 @@
+[
+  {
+    "name": "Internal Developer Platform",
+    "ring": "adote",
+    "quadrant": "plataformas",
+    "isNew": "FALSE",
+    "status": "Moved In",
+    "previousRing": "teste",
+    "links": [
+      { "label": "ADR-012", "url": "https://github.com/azos/architecture/blob/main/adr/012-internal-developer-platform.md" }
+    ],
+    "description": "A unified internal platform that abstracts infrastructure complexity, enabling teams to self-serve environments, deployments, and observability."
+  },
+  {
+    "name": "AI-Assisted Code Review",
+    "ring": "teste",
+    "quadrant": "técnicas",
+    "isNew": "TRUE",
+    "links": [
+      { "label": "RFC", "url": "https://github.com/azos/rfcs/blob/main/ai-code-review.md" },
+      { "label": "Discussão", "url": "https://github.com/azos/engineering/discussions/342" }
+    ],
+    "description": "Automated code review using LLMs to catch logic bugs, security issues, and style violations before human review."
+  },
+  {
+    "name": "Observability Stack (OTel + Grafana)",
+    "ring": "adote",
+    "quadrant": "plataformas",
+    "isNew": "FALSE",
+    "status": "No Change",
+    "links": [
+      { "label": "ADR-008", "url": "https://github.com/azos/architecture/blob/main/adr/008-observability-stack.md" }
+    ],
+    "description": "OpenTelemetry-based instrumentation with Grafana dashboards for traces, metrics, and logs across all services."
+  },
+  {
+    "name": "Feature Flag System",
+    "ring": "adote",
+    "quadrant": "ferramentas",
+    "isNew": "FALSE",
+    "status": "No Change",
+    "links": [
+      { "label": "ADR-015", "url": "https://github.com/azos/architecture/blob/main/adr/015-feature-flags.md" }
+    ],
+    "description": "Centralized feature flag platform enabling gradual rollouts, A/B testing, and kill switches without deployments."
+  },
+  {
+    "name": "Event-Driven Architecture",
+    "ring": "teste",
+    "quadrant": "técnicas",
+    "isNew": "FALSE",
+    "status": "Moved In",
+    "previousRing": "avalie",
+    "links": [
+      { "label": "ADR-021", "url": "https://github.com/azos/architecture/blob/main/adr/021-event-driven-architecture.md" },
+      { "label": "RFC", "url": "https://github.com/azos/rfcs/blob/main/event-sourcing.md" }
+    ],
+    "description": "Asynchronous communication between services via event streams, enabling loose coupling and real-time data flows."
+  },
+  {
+    "name": "WebAssembly on the Server",
+    "ring": "avalie",
+    "quadrant": "linguagens e frameworks",
+    "isNew": "TRUE",
+    "description": "Running WebAssembly workloads on the server side for sandboxed, portable, high-performance computation."
+  },
+  {
+    "name": "Apache Kafka",
+    "ring": "adote",
+    "quadrant": "plataformas",
+    "isNew": "FALSE",
+    "description": "Distributed event streaming platform used as the backbone for our event-driven architecture."
+  },
+  {
+    "name": "Backstage (Developer Portal)",
+    "ring": "teste",
+    "quadrant": "ferramentas",
+    "isNew": "FALSE",
+    "status": "Moved In",
+    "previousRing": "avalie",
+    "links": [
+      { "label": "ADR-018", "url": "https://github.com/azos/architecture/blob/main/adr/018-backstage.md" }
+    ],
+    "description": "Spotify's developer portal for cataloging services, documentation, and self-service actions in one place."
+  },
+  {
+    "name": "SST (Serverless Stack)",
+    "ring": "avalie",
+    "quadrant": "linguagens e frameworks",
+    "isNew": "TRUE",
+    "description": "Framework for building serverless applications with TypeScript, offering live Lambda debugging and infrastructure as code."
+  },
+  {
+    "name": "Platform Engineering Team",
+    "ring": "adote",
+    "quadrant": "técnicas",
+    "isNew": "FALSE",
+    "status": "No Change",
+    "description": "A dedicated team building and maintaining the internal developer platform, treating infrastructure as a product."
+  },
+  {
+    "name": "DORA Metrics Dashboard",
+    "ring": "teste",
+    "quadrant": "ferramentas",
+    "isNew": "FALSE",
+    "links": [
+      { "label": "ADR-025", "url": "https://github.com/azos/architecture/blob/main/adr/025-dora-metrics.md" },
+      { "label": "Dashboard", "url": "https://grafana.azos.internal/d/dora" }
+    ],
+    "description": "Automated tracking of Deployment Frequency, Lead Time, MTTR, and Change Failure Rate across all teams."
+  },
+  {
+    "name": "GraphQL Federation",
+    "ring": "cuidado",
+    "quadrant": "linguagens e frameworks",
+    "isNew": "FALSE",
+    "status": "Moved Out",
+    "previousRing": "teste",
+    "links": [
+      { "label": "ADR-030", "url": "https://github.com/azos/architecture/blob/main/adr/030-graphql-federation-sunset.md" },
+      { "label": "Discussão", "url": "https://github.com/azos/engineering/discussions/401" },
+      { "label": "RFC", "url": "https://github.com/azos/rfcs/blob/main/graphql-alternatives.md" }
+    ],
+    "description": "We continue to see teams struggle with the operational complexity of Apollo Federation. Consider simpler alternatives."
+  }
+]

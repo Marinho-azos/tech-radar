@@ -652,10 +652,7 @@ const Radar = function (size, radar) {
       .attr('class', 'footer-content')
       .append('p')
       .html(
-        'Powered by <a href="https://www.thoughtworks.com"> Thoughtworks</a>. ' +
-          'By using this service you agree to <a href="https://www.thoughtworks.com/radar/tos">Thoughtworks\' terms of use</a>. ' +
-          'You also agree to our <a href="https://www.thoughtworks.com/privacy-policy">privacy policy</a>, which describes how we will gather, use and protect any personal data contained in your public Google Sheet. ' +
-          'This software is <a href="https://github.com/thoughtworks/build-your-own-radar">open source</a> and available for download and self-hosting.',
+        'Powered by <a href="https://github.com/thoughtworks/build-your-own-radar">Build Your Own Radar</a>.',
       )
   }
 
@@ -767,7 +764,7 @@ const Radar = function (size, radar) {
       .classed('disclaimer-text', true)
       .classed('show-disclaimer', true)
       .html(
-        '<b>Note:</b> The official Thoughtworks Technology Radar has updated the name of the outermost ring from “Hold” to “Caution”. The open-source Build Your Own Radar tool will now reflect this change and use the “Caution” label.',
+        '<b>Note:</b> The outermost ring was updated from "Hold" to "Caution".',
       )
   }
   self.plot = function () {

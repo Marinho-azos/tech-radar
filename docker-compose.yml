@@ -1,0 +1,7 @@
+services:
+  radar:
+    build: .
+    image: azos-tech-radar:latest
+    ports:
+      - "8080:80"
+    container_name: azos-tech-radar

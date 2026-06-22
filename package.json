@@ -1,7 +1,7 @@
 {
-  "name": "build-your-own-radar",
-  "version": "1.2.1",
-  "description": "",
+  "name": "azos-tech-radar",
+  "version": "1.0.0",
+  "description": "Azos-branded Build Your Own Radar",
   "main": "index.js",
   "scripts": {
     "build:dev": "webpack --mode development --config webpack.dev.js",
@@ -15,7 +15,7 @@
     "lint-prettier:fix": "eslint . --fix && prettier --write .",
     "quality": "npm run lint-prettier:check && npm run test:coverage"
   },
-  "author": "Thoughtworks",
+  "author": "Azos",
   "repository": {
     "type": "git",
     "url": "https://github.com/thoughtworks/build-your-own-radar"

@@ -1,0 +1,111 @@
+[
+  {
+    "name": "Amplitude Analytics",
+    "ring": "adote",
+    "quadrant": "ferramentas",
+    "isNew": "FALSE",
+    "status": "No Change",
+    "description": "Product analytics platform for tracking user behavior, funnel analysis, and retention cohorts across all growth initiatives."
+  },
+  {
+    "name": "Multi-Armed Bandit Testing",
+    "ring": "teste",
+    "quadrant": "técnicas",
+    "isNew": "TRUE",
+    "links": [
+      { "label": "RFC", "url": "https://github.com/azos/rfcs/blob/main/multi-armed-bandit.md" }
+    ],
+    "description": "Dynamic A/B testing that automatically allocates more traffic to winning variants, reducing time-to-convergence."
+  },
+  {
+    "name": "GrowthBook",
+    "ring": "adote",
+    "quadrant": "ferramentas",
+    "isNew": "FALSE",
+    "status": "Moved In",
+    "previousRing": "teste",
+    "links": [
+      { "label": "ADR-022", "url": "https://github.com/azos/architecture/blob/main/adr/022-growthbook.md" },
+      { "label": "Discussão", "url": "https://github.com/azos/engineering/discussions/289" }
+    ],
+    "description": "Open-source feature flagging and A/B testing platform with statistical engine for experiment analysis."
+  },
+  {
+    "name": "Customer Data Platform (CDP)",
+    "ring": "teste",
+    "quadrant": "plataformas",
+    "isNew": "FALSE",
+    "description": "Unified customer data platform aggregating events from multiple sources into a single profile for segmentation and personalization."
+  },
+  {
+    "name": "ML-Driven Churn Prediction",
+    "ring": "teste",
+    "quadrant": "técnicas",
+    "isNew": "FALSE",
+    "description": "Machine learning models that predict user churn based on behavioral patterns, enabling proactive retention campaigns."
+  },
+  {
+    "name": "Heap",
+    "ring": "avalie",
+    "quadrant": "ferramentas",
+    "isNew": "TRUE",
+    "description": "Auto-captured analytics — tracks every user interaction without manual event instrumentation, then lets you retroactively define events."
+  },
+  {
+    "name": "VWO (Visual Website Optimizer)",
+    "ring": "cuidado",
+    "quadrant": "ferramentas",
+    "isNew": "FALSE",
+    "status": "Moved Out",
+    "previousRing": "adote",
+    "links": [
+      { "label": "ADR-031", "url": "https://github.com/azos/architecture/blob/main/adr/031-deprecate-vwo.md" }
+    ],
+    "description": "VWO has been deprecated in favor of GrowthBook for A/B testing and Amplitude for analytics. No longer recommended for new experiments."
+  },
+  {
+    "name": "Referral Program Automation",
+    "ring": "adote",
+    "quadrant": "técnicas",
+    "isNew": "FALSE",
+    "status": "No Change",
+    "description": "Automated referral tracking, reward distribution, and viral loop analysis to optimize our referral engine."
+  },
+  {
+    "name": "dbt (Data Build Tool)",
+    "ring": "adote",
+    "quadrant": "ferramentas",
+    "isNew": "FALSE",
+    "links": [
+      { "label": "ADR-010", "url": "https://github.com/azos/architecture/blob/main/adr/010-dbt.md" }
+    ],
+    "description": "SQL-first transformation tool for analytics engineering, enabling version-controlled, tested data models in our warehouse."
+  },
+  {
+    "name": "Personalization Engine",
+    "ring": "teste",
+    "quadrant": "técnicas",
+    "isNew": "TRUE",
+    "description": "Real-time content and product personalization based on user segment, behavior, and lifecycle stage."
+  },
+  {
+    "name": "Segment",
+    "ring": "avalie",
+    "quadrant": "plataformas",
+    "isNew": "FALSE",
+    "status": "Moved Out",
+    "previousRing": "teste",
+    "links": [
+      { "label": "ADR-035", "url": "https://github.com/azos/architecture/blob/main/adr/035-segment-evaluation.md" },
+      { "label": "Discussão", "url": "https://github.com/azos/engineering/discussions/412" }
+    ],
+    "description": "Evaluating whether to consolidate Segment into our custom CDP to reduce costs and increase data control."
+  },
+  {
+    "name": "Next.js for Growth Landing Pages",
+    "ring": "adote",
+    "quadrant": "linguagens e frameworks",
+    "isNew": "FALSE",
+    "description": "React framework used for high-performance, SEO-optimized landing pages with ISR and edge rendering."
+  }
+]

@@ -1,23 +1,14 @@
-FROM nginx:1.23.0
-
-RUN apt-get update && apt-get upgrade -y
-
-RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
-RUN apt-get install -y nodejs
-
-RUN                                                                       \
-  apt-get install -y                                                      \
-  libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3    \
-  libxss1 libasound2 libxtst6 xauth xvfb g++ make
-
+FROM node:24-alpine AS builder
 WORKDIR /src/build-your-own-radar
-COPY package.json ./
-COPY package-lock.json ./
+RUN apk add --no-cache python3 make g++
+COPY package.json package-lock.json ./
+ENV CYPRESS_INSTALL_BINARY=0
 RUN npm ci
-
 COPY . ./
+RUN npm run build:prod
 
-# Override parent node image's entrypoint script (/usr/local/bin/docker-entrypoint.sh),
-# which tries to run CMD as a node command
-ENTRYPOINT []
-CMD ["./build_and_start_nginx.sh"]
+FROM nginx:1.23.0
+COPY --from=builder /src/build-your-own-radar/default.template /etc/nginx/conf.d/default.conf
+COPY --from=builder /src/build-your-own-radar/dist /opt/build-your-own-radar
+COPY --from=builder /src/build-your-own-radar/data /opt/build-your-own-radar/files
+RUN rm -f /opt/build-your-own-radar/files/radar.csv /opt/build-your-own-radar/files/radar.json

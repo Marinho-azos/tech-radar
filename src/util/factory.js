@@ -351,8 +351,8 @@ const Factory = function () {
         const content = d3.select('body').append('div').attr('class', 'input-sheet')
         plotLogo(content)
         const bannerText =
-          '<div><h1>Build your own radar</h1><p>Once you\'ve <a href ="https://www.thoughtworks.com/radar/byor">created your Radar</a>, you can use this service' +
-          ' to generate an <br />interactive version of your Technology Radar. Not sure how? <a href ="https://www.thoughtworks.com/radar/byor">Read this first.</a></p></div>'
+          '<div><h1>Azos Radar</h1><p>Once you\'ve created your Radar' +
+          ' to generate an <br />interactive version of your Technology Radar.</p></div>'
 
         plotBanner(content, bannerText)
         plotDisclaimer(content)
@@ -369,7 +369,7 @@ const Factory = function () {
 }
 
 function setDocumentTitle() {
-  document.title = 'Build your own Radar'
+  document.title = 'Azos Radar'
 }
 
 function plotLoading(content) {
@@ -397,7 +397,7 @@ function plotLogo(content) {
   content
     .append('div')
     .attr('class', 'input-sheet__logo')
-    .html('<a href="https://www.thoughtworks.com"><img src="/images/tw-logo.png" alt="logo"/ ></a>')
+    .html('<a href="https://www.azos.com.br" class="azos-logo-link" target="_blank" rel="noopener"><svg class="azos-logo" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 20" height="28"><path fill="currentColor" d="M30.442 4.5h13.22L30.217 16.665v2.898h21.258v-4.074H38.172L51.475 3.461V.426H30.442V4.5zM11.865.426L0 19.563h5.82l2.109-3.581h13.44l2.108 3.58h5.82L17.432.427h-5.567zm2.784 12.397a3.55 3.55 0 01-1.933-.57 3.405 3.405 0 01-1.281-1.518 3.295 3.295 0 01-.198-1.954 3.355 3.355 0 01.952-1.731 3.51 3.51 0 011.78-.926 3.57 3.57 0 012.01.193 3.46 3.46 0 011.562 1.245c.382.556.586 1.21.586 1.88 0 .896-.366 1.756-1.019 2.39a3.53 3.53 0 01-2.46.991zM64.413 0c-7.545 0-12.238 3.974-12.238 10s4.693 10 12.238 10 12.239-3.974 12.239-10S71.958 0 64.413 0zm0 15.895c-4.536 0-7.275-2.292-7.275-5.895 0-3.603 2.74-5.895 7.275-5.895 4.536 0 7.276 2.292 7.276 5.895 0 3.603-2.74 5.895-7.276 5.895zM88.81 7.833c-3.027-.15-5.483-.338-5.483-1.912 0-1.257 2.11-1.816 5.624-1.816 3.57 0 5.538 1.023 5.538 2.609h5.005C99.493 2.75 95.388 0 88.95 0c-6.214 0-10.628 2.23-10.628 6.14 0 5.432 5.737 5.67 10.487 5.829 3.353.112 6.213.184 6.213 2.017 0 1.34-2.136 1.913-6.213 1.913-3.824 0-5.764-1.038-5.764-2.624h-5.229C77.788 17.212 82.006 20 88.838 20 95.867 20 100 17.95 100 13.82c0-5.608-6.33-5.747-11.191-5.987z"/></svg></a>')
 }
 
 function plotFooter(content) {
@@ -408,10 +408,7 @@ function plotFooter(content) {
     .attr('class', 'footer-content')
     .append('p')
     .html(
-      'Powered by <a href="https://www.thoughtworks.com"> Thoughtworks</a>. ' +
-        'By using this service you agree to <a href="https://www.thoughtworks.com/radar/tos">Thoughtworks\' terms of use</a>. ' +
-        'You also agree to our <a href="https://www.thoughtworks.com/privacy-policy">privacy policy</a>, which describes how we will gather, use and protect any personal data contained in your public Google Sheet. ' +
-        'This software is <a href="https://github.com/thoughtworks/build-your-own-radar">open source</a> and available for download and self-hosting.',
+      'Powered by <a href="https://github.com/thoughtworks/build-your-own-radar">Build Your Own Radar</a>.',
     )
 }
 
@@ -425,7 +422,7 @@ function plotDisclaimer(content) {
     .append('p')
     .attr('class', 'landing-disclaimer-text show-disclaimer')
     .html(
-      '<b>Note:</b> The official Thoughtworks Technology Radar has updated the name of the outermost ring from “Hold” to “Caution”. The open-source Build Your Own Radar tool will now reflect this change and use the “Caution” label.',
+      '<b>Note:</b> The outermost ring was updated from "Hold" to "Caution".',
     )
 }
 
@@ -435,7 +432,7 @@ function plotForm(content) {
     .attr('class', 'input-sheet__form')
     .append('p')
     .html(
-      '<strong>Enter the URL of your <a href="https://www.thoughtworks.com/radar/byor" target="_blank">Google Sheet, CSV or JSON</a> file below…</strong>',
+      '<strong>Enter the URL of your Google Sheet, CSV or JSON file below…</strong>',
     )
 
   var form = content.select('.input-sheet__form').append('form').attr('method', 'get')
@@ -449,7 +446,7 @@ function plotForm(content) {
 
   form.append('button').attr('type', 'submit').append('a').attr('class', 'button').text('Build my radar')
 
-  form.append('p').html("<a href='https://www.thoughtworks.com/radar/byor#guide'>Need help?</a>")
+  form.append('p').html('')
 }
 
 function plotErrorMessage(exception, fileType) {
@@ -462,8 +459,8 @@ function plotErrorMessage(exception, fileType) {
     plotLogo(content)
 
     const bannerText =
-      '<div><h1>Build your own radar</h1><p>Once you\'ve <a href ="https://www.thoughtworks.com/radar/byor">created your Radar</a>, you can use this service' +
-      ' to generate an <br />interactive version of your Technology Radar. Not sure how? <a href ="https://www.thoughtworks.com/radar/byor">Read this first.</a></p></div>'
+      '<div><h1>Azos Radar</h1><p>Once you\'ve created your Radar' +
+      ' to generate an <br />interactive version of your Technology Radar.</p></div>'
 
     plotBanner(content, bannerText)
 
@@ -476,12 +473,12 @@ function plotErrorMessage(exception, fileType) {
 
 function plotError(exception, fileType) {
   let message
-  let faqMessage = 'Please check <a href="https://www.thoughtworks.com/radar/byor">FAQs</a> for possible solutions.'
+  let faqMessage = 'Please check the FAQs for possible solutions.'
   if (featureToggles.UIRefresh2022) {
     message = exception.message
     if (exception instanceof SheetNotFoundError) {
-      const href = 'https://www.thoughtworks.com/radar/byor'
-      faqMessage = `You can also check the <a href="${href}">FAQs</a> for other possible solutions`
+      const href = ''
+      faqMessage = `You can also check the FAQs for other possible solutions`
     }
     if (exception instanceof InvalidConfigError) {
       faqMessage = ''
@@ -529,7 +526,7 @@ function plotUnauthorizedErrorMessage() {
 
     plotLogo(content)
 
-    const bannerText = '<div><h1>Build your own radar</h1></div>'
+    const bannerText = '<div><h1>Azos Radar</h1></div>'
 
     plotBanner(content, bannerText)
 

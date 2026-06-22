@@ -1,115 +1,584 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/images/favicon.ico" rel="icon" />
-    <link rel="preconnect" href="https://rsms.me/" />
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" integrity="sha512-byor" crossorigin="anonymous" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&display=swap" rel="stylesheet" />
-  </head>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azos Radar</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
 
-  <body>
-    <header class="input-sheet__logo">
-      <div>
-        <span>Powered by</span>
-        <a href="https://www.thoughtworks.com"><img src="/images/tw-logo.png" alt="Thoughtworks logo" /></a>
-      </div>
-    </header>
-    <div class="hero-banner">
-      <div class="hero-banner__wrapper">
-        <h1 class="hero-banner__title-text">Build your own Radar</h1>
-      </div>
+  :root{
+    --green-950:#06200F;
+    --green-900:#0B3D1E;
+    --green-800:#123F22;
+    --green-700:#0F6E56;
+    --green-600:#1D9E75;
+    --green-200:#8FD19E;
+    --green-100:#E1F5EE;
+    --paper:#F4F1EC;
+    --ink:#13241A;
+    --ink-soft:#54635A;
+    --line:rgba(11,61,30,0.12);
+    --adopt:#1D9E75;
+    --trial:#378ADD;
+    --assess:#BA7517;
+    --hold:#A32D2D;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+  .display{font-family:'Archivo Expanded',sans-serif;letter-spacing:-0.01em;}
+
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(circle at 88% 0%, rgba(143,209,158,0.16), transparent 50%),
+      linear-gradient(160deg, var(--green-950) 0%, var(--green-900) 55%, var(--green-800) 100%);
+    padding:32px 56px 38px;
+  }
+  .topbar{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{width:30px;height:30px;border-radius:8px;background:#fff;color:var(--green-900);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;font-family:'Archivo Expanded',sans-serif;}
+  .brand-name{color:#fff;font-size:14px;letter-spacing:0.04em;font-weight:500;}
+  .breadcrumb{display:flex;align-items:center;gap:10px;font-size:12.5px;color:rgba(255,255,255,0.55);}
+  .breadcrumb a{color:rgba(255,255,255,0.55);text-decoration:none;}
+  .breadcrumb a:hover{color:#fff;}
+  .breadcrumb .pill{background:rgba(255,255,255,0.12);color:#fff;padding:4px 11px;border-radius:20px;font-weight:500;}
+
+  .hero-body{position:relative;z-index:2;margin-top:30px;max-width:680px;}
+  .eyebrow{font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;color:var(--green-200);font-weight:600;margin:0 0 10px;display:flex;align-items:center;gap:7px;}
+  .eyebrow::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green-200);box-shadow:0 0 0 0 rgba(143,209,158,0.55);animation:pulse-dot 2.4s ease-out infinite;}
+  @keyframes pulse-dot{0%{box-shadow:0 0 0 0 rgba(143,209,158,0.55);}70%{box-shadow:0 0 0 6px rgba(143,209,158,0);}100%{box-shadow:0 0 0 0 rgba(143,209,158,0);}}
+  h1.hero-title{font-size:34px;color:#fff;margin:0 0 10px;font-weight:600;}
+  .hero-sub{font-size:14.5px;line-height:1.6;color:rgba(255,255,255,0.62);margin:0;max-width:540px;}
+
+  .toolbar{
+    max-width:1180px;margin:0 auto;
+    padding:24px 56px 0;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:24px;flex-wrap:wrap;
+  }
+  .quadrant-nav{display:flex;gap:6px;flex-wrap:wrap;}
+  .qbtn{
+    border:none;background:transparent;cursor:pointer;
+    font-family:'Inter',sans-serif;font-size:13px;font-weight:500;
+    color:var(--ink-soft);padding:8px 15px;border-radius:20px;
+    transition:background 0.15s, color 0.15s;
+  }
+  .qbtn:hover{background:rgba(11,61,30,0.06);}
+  .qbtn.active{background:var(--green-900);color:#fff;}
+
+  .search-wrap{position:relative;width:260px;}
+  .search-wrap input{
+    width:100%;padding:9px 14px 9px 36px;border-radius:20px;
+    border:1px solid var(--line);background:#fff;font-size:13px;
+    font-family:'Inter',sans-serif;color:var(--ink);
+  }
+  .search-wrap input:focus{outline:none;border-color:var(--green-600);}
+  .search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ink-soft);}
+
+  .main{
+    max-width:1180px;margin:0 auto;
+    padding:28px 56px 90px;
+    display:grid;
+    grid-template-columns:420px 1fr;
+    gap:36px;
+    align-items:start;
+  }
+
+  .radar-panel{
+    background:#fff;border:1px solid var(--line);border-radius:18px;
+    padding:24px;position:sticky;top:24px;
+  }
+  .radar-panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .radar-panel-head h3{font-size:14px;font-weight:600;margin:0;}
+  .legend-mini{display:flex;gap:12px;flex-wrap:wrap;}
+  .legend-mini span{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--ink-soft);}
+  .legend-mini i{width:7px;height:7px;border-radius:50%;display:inline-block;}
+
+  svg.radarsvg{width:100%;height:auto;display:block;}
+  .ring-line{fill:none;stroke:var(--line);stroke-width:1;}
+  .axis-line{stroke:var(--line);stroke-width:1;}
+  .quad-label{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;fill:var(--ink-soft);}
+  .ring-label{font-family:'Inter',sans-serif;font-size:9.5px;fill:var(--ink-soft);opacity:0.7;}
+  .radar-dot{cursor:pointer;transition:r 0.15s, opacity 0.15s;}
+  .radar-dot.dim{opacity:0.18;}
+  .radar-dot-label{font-family:'Inter',sans-serif;font-size:9px;font-weight:600;fill:#fff;pointer-events:none;}
+
+  .ring-filter-row{display:flex;gap:6px;margin-top:16px;flex-wrap:wrap;}
+  .rbtn{
+    border:1px solid var(--line);background:#fff;cursor:pointer;
+    font-family:'Inter',sans-serif;font-size:11.5px;font-weight:500;
+    padding:6px 11px;border-radius:14px;color:var(--ink-soft);
+    display:inline-flex;align-items:center;gap:6px;
+    transition:border-color 0.15s, color 0.15s;
+  }
+  .rbtn i{width:7px;height:7px;border-radius:50%;display:inline-block;}
+  .rbtn.active{border-color:var(--rcolor);color:var(--ink);background:color-mix(in srgb, var(--rcolor) 10%, white);}
+
+  .list-panel{display:flex;flex-direction:column;gap:20px;}
+  .ring-group{}
+  .ring-group-head{
+    display:flex;align-items:center;gap:10px;margin-bottom:10px;
+    padding-bottom:8px;border-bottom:1px solid var(--line);
+  }
+  .ring-dot{width:9px;height:9px;border-radius:50%;flex:none;}
+  .ring-group-head h4{font-size:14px;font-weight:600;margin:0;flex:1;}
+  .ring-group-head span{font-size:12px;color:var(--ink-soft);}
+
+  .item-card{
+    background:#fff;border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;margin-bottom:8px;
+    display:flex;align-items:flex-start;gap:12px;
+    cursor:pointer;transition:border-color 0.15s, transform 0.12s;
+  }
+  .item-card:hover{border-color:rgba(11,61,30,0.25);transform:translateX(3px);}
+  .item-num{
+    width:24px;height:24px;border-radius:50%;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:600;color:#fff;margin-top:1px;
+  }
+  .item-body{flex:1;min-width:0;}
+  .item-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:3px;}
+  .item-name{font-size:14px;font-weight:600;margin:0;}
+  .item-quad{font-size:11px;color:var(--ink-soft);background:var(--green-100);color:var(--green-700);padding:2px 8px;border-radius:10px;font-weight:500;white-space:nowrap;}
+  .item-desc{font-size:12.5px;color:var(--ink-soft);line-height:1.55;margin:0;}
+  .item-move{font-size:11px;color:var(--ink-soft);display:flex;align-items:center;gap:4px;margin-top:6px;}
+
+  .item-card.highlight{border-color:var(--green-600);box-shadow:0 0 0 2px rgba(29,158,117,0.12);}
+
+  .item-link-icon{flex:none;display:flex;align-items:center;color:var(--ink-soft);opacity:0.5;margin-top:1px;}
+  .item-link-icon svg{display:block;}
+  .item-card:hover .item-link-icon{opacity:0.8;}
+
+  .item-links{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:8px;}
+  .item-link{
+    font-size:11.5px;color:var(--green-600);text-decoration:none;font-weight:500;
+    padding:2px 8px;border-radius:8px;background:var(--green-100);
+    transition:background 0.15s;
+  }
+  .item-link:hover{background:#cce8d8;}
+  .item-link-more{
+    font-size:11.5px;color:var(--ink-soft);background:transparent;
+    border:1px dashed var(--line);border-radius:8px;cursor:pointer;
+    padding:2px 8px;font-family:'Inter',sans-serif;font-weight:500;
+    transition:border-color 0.15s,color 0.15s;
+  }
+  .item-link-more:hover{border-color:var(--green-600);color:var(--green-600);}
+  .item-links-hidden{display:inline;} /* toggled via style attribute */
+
+  @media (max-width:900px){
+    .hero{padding:24px 24px 32px;}
+    .hero-title{font-size:26px;}
+    .toolbar{padding:20px 24px 0;}
+    .main{grid-template-columns:1fr;padding:20px 24px 60px;}
+    .radar-panel{position:static;}
+    .search-wrap{width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark">A</div>
+      <span class="brand-name">Azos</span>
     </div>
-    <main>
-      <div id="pdf-cover-page">
-        <img class="pdf-banner-image" src="/images/pdf_banner.png" alt="Pdf cover image" width="100%" height="300px" />
-        <h1 class="pdf-title"></h1>
-        <div class="pdf-powered-by-text">
-          <span>Powered by</span>
-          <a href="https://www.thoughtworks.com">
-            <img class="pdf-tw-logo" src="/images/tw-logo.png" alt="logo" />
-          </a>
-        </div>
-      </div>
-      <div class="helper-description home-page">
-        <p>
-          Once you've <a href="https://www.thoughtworks.com/radar/byor">created your Radar</a> you can use this service
-          to generate an interactive version of your Technology Radar. Not sure how?
-          <a href="https://www.thoughtworks.com/radar/byor">Read this first.</a>
-        </p>
-        <span class="loader-text">
-          <span class="loader-text__title">Building your radar...</span>
-          <p>Your Technology Radar will be available in just a few seconds</p>
-          <div class="loader-wrapper">
-            <div style="animation-delay: 0s"></div>
-            <div style="animation-delay: 0.25s"></div>
-            <div style="animation-delay: 0.75s"></div>
-            <div style="animation-delay: 0.5s"></div>
-          </div>
-        </span>
-        <p class="landing-disclaimer-text show-disclaimer">
-          <b>Note:</b> The official Thoughtworks Technology Radar has updated the name of the outermost ring from “Hold”
-          to “Caution”. The open-source Build Your Own Radar tool will now reflect this change and use the “Caution”
-          label.
-        </p>
-      </div>
-      <div id="error-container" class="error-container home-page"></div>
-      <div class="input-sheet-form home-page">
-        <p>
-          Enter the URL of your
-          <a href="https://www.thoughtworks.com/radar/byor" target="_blank">Google Sheet, CSV or JSON</a> file below…
-        </p>
-        <form id="byor-form-submit" method="get">
-          <input
-            type="text"
-            name="documentId"
-            id="document-input"
-            placeholder="e.g. https://docs.google.com/spreadsheets/d/<sheetid> or hosted CSV/JSON file"
-            required=""
-          />
-          <input type="submit" value="Build my radar" />
-          <a href="https://www.thoughtworks.com/radar/byor#guide">Need help?</a>
-        </form>
-      </div>
-      <div class="graph-header"></div>
-      <div id="radar">
-        <p class="no-blip-text">
-          There are no blips on this quadrant, please check your Google sheet/CSV/JSON file once.
-        </p>
-      </div>
-      <div class="all-quadrants-mobile show-all-quadrants-mobile"></div>
-      <div class="graph-footer"></div>
-    </main>
-    <footer class="home-page">
-      <div class="pdf-footer">
-        <div class="pdf-powered-by-text">
-          <span>Powered by</span>
-          <a href="https://www.thoughtworks.com">
-            <img class="pdf-tw-logo" src="/images/tw-logo.png" alt="logo" />
-          </a>
-          <div class="pdf-footer-title">Build your own Radar</div>
-          <a class="radar-link" id="generated-radar-link" href="https://radar.thoughtworks.com">
-            radar.thoughtworks.com
-          </a>
-        </div>
-      </div>
-      <p class="agree-terms">
-        Powered by <a href="https://www.thoughtworks.com"> Thoughtworks</a>. By using this service you agree to
-        <a href="https://www.thoughtworks.com/radar/tos">Thoughtworks' terms of use</a>. You also agree to our
-        <a href="https://www.thoughtworks.com/privacy-policy">privacy policy</a>, which describes how we will gather,
-        use and protect any personal data contained in your public Google Sheet. This software is
-        <a href="https://github.com/thoughtworks/build-your-own-radar">open source</a> and available for download and
-        self-hosting.
-      </p>
-    </footer>
-    <div class="pdf-page-footer">
-      <div class="footer-left">radar.thoughtworks.com</div>
-      <div class="footer-right">
-        Build your own radar, <span class="footer-date">dd/mm/yyyy</span> | <span class="footer-page-number">00</span>
-      </div>
+    <div class="breadcrumb">
+      <a href="/files/">Engenharia</a>
+      <span class="pill" id="breadcrumbPill">Radar tecnológico</span>
     </div>
-  </body>
+  </div>
+  <div class="hero-body">
+    <p class="eyebrow" id="heroEyebrow">Radar de tecnologia · Q2 2026</p>
+    <h1 class="hero-title display" id="heroTitle">Azos Radar</h1>
+    <p class="hero-sub" id="heroSub">Acompanhe as decisões tecnológicas que guiam a engenharia da Azos.</p>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="quadrant-nav" id="quadrantNav">
+    <button class="qbtn active" data-q="all">Todos os quadrantes</button>
+    <button class="qbtn" data-q="tecnicas">Técnicas</button>
+    <button class="qbtn" data-q="plataformas">Plataformas</button>
+    <button class="qbtn" data-q="ferramentas">Ferramentas</button>
+    <button class="qbtn" data-q="linguagens">Linguagens e frameworks</button>
+  </div>
+  <div class="search-wrap">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <input type="text" id="searchInput" placeholder="Buscar item no radar">
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="radar-panel">
+    <div class="radar-panel-head">
+      <h3 id="radarPanelTitle">Mapa do radar</h3>
+      <span id="radarItemCount" style="font-size:12px;color:var(--ink-soft)">12 itens</span>
+    </div>
+    <div class="legend-mini">
+      <span><i style="background:#1D9E75"></i>Adotar</span>
+      <span><i style="background:#378ADD"></i>Testar</span>
+      <span><i style="background:#BA7517"></i>Avaliar</span>
+      <span><i style="background:#A32D2D"></i>Cautela</span>
+    </div>
+
+    <svg class="radarsvg" viewBox="0 0 400 400" id="radarSvg" role="img" aria-label="Radar de tecnologia com quatro quadrantes">
+      <circle class="ring-line" cx="200" cy="200" r="170"/>
+      <circle class="ring-line" cx="200" cy="200" r="128"/>
+      <circle class="ring-line" cx="200" cy="200" r="84"/>
+      <circle class="ring-line" cx="200" cy="200" r="40"/>
+      <line class="axis-line" x1="200" y1="30" x2="200" y2="370"/>
+      <line class="axis-line" x1="30" y1="200" x2="370" y2="200"/>
+
+      <text class="quad-label" x="40" y="48">Técnicas</text>
+      <text class="quad-label" x="360" y="48" text-anchor="end">Plataformas</text>
+      <text class="quad-label" x="40" y="358">Linguagens</text>
+      <text class="quad-label" x="360" y="358" text-anchor="end">Ferramentas</text>
+
+      <g id="dotsLayer"></g>
+    </svg>
+
+    <div class="ring-filter-row" id="ringFilter">
+      <button class="rbtn active" data-ring="all" style="--rcolor:#54635A"><i style="background:#54635A"></i>Todos</button>
+      <button class="rbtn" data-ring="adotar" style="--rcolor:#1D9E75"><i style="background:#1D9E75"></i>Adotar</button>
+      <button class="rbtn" data-ring="testar" style="--rcolor:#378ADD"><i style="background:#378ADD"></i>Testar</button>
+      <button class="rbtn" data-ring="avaliar" style="--rcolor:#BA7517"><i style="background:#BA7517"></i>Avaliar</button>
+      <button class="rbtn" data-ring="cautela" style="--rcolor:#A32D2D"><i style="background:#A32D2D"></i>Cautela</button>
+    </div>
+  </div>
+
+  <div class="list-panel" id="listPanel"></div>
+
+</div>
+
+<script>
+const RINGS = {
+  adotar:  {color:'#1D9E75', dark:'#085041', label:'Adotar',  radius:[0,40]},
+  testar:  {color:'#378ADD', dark:'#185FA5', label:'Testar',  radius:[40,84]},
+  avaliar: {color:'#BA7517', dark:'#854F0B', label:'Avaliar', radius:[84,128]},
+  cautela: {color:'#A32D2D', dark:'#791F1F', label:'Cautela', radius:[128,170]}
+};
+
+const QUADRANTS = {
+  tecnicas:    {angleStart:180, angleEnd:270, label:'Técnicas'},
+  plataformas: {angleStart:270, angleEnd:360, label:'Plataformas'},
+  linguagens:  {angleStart:90,  angleEnd:180, label:'Linguagens'},
+  ferramentas: {angleStart:0,   angleEnd:90,  label:'Ferramentas'}
+};
+
+const RING_MAP = {adote:'adotar', teste:'testar', avalie:'avaliar', cuidado:'cautela'};
+const QUAD_MAP = {técnicas:'tecnicas', plataformas:'plataformas', ferramentas:'ferramentas', 'linguagens e frameworks':'linguagens'};
+
+const RADAR_INFO = {
+  company: {
+    title: 'Azos Radar — Company',
+    sub: 'Acompanhe as decisões tecnológicas, tendências e práticas que guiam a engenharia da Azos.',
+    pill: 'Radar tecnológico'
+  },
+  growth: {
+    title: 'Azos Radar — Growth',
+    sub: 'Ferramentas e metodologias que impulsionam o crescimento, com foco em experimentação, dados e otimização contínua.',
+    pill: 'Radar de crescimento'
+  },
+  postSales: {
+    title: 'Azos Radar — Post-Sales',
+    sub: 'Inovações para a experiência do cliente pós-venda, abrangendo sucesso do cliente, suporte e retenção.',
+    pill: 'Radar de experiência'
+  }
+};
+
+const params = new URLSearchParams(window.location.search);
+let radarKey = 'company';
+const docId = params.get('documentId');
+if (docId) {
+  if (docId.includes('growth')) radarKey = 'growth';
+  else if (docId.includes('post-sales')) radarKey = 'postSales';
+}
+
+if (docId) {
+  const info = RADAR_INFO[radarKey];
+  if (info) {
+    document.getElementById('heroTitle').textContent = info.title;
+    document.getElementById('heroSub').textContent = info.sub;
+    document.getElementById('breadcrumbPill').textContent = info.pill;
+  }
+}
+
+let ITEMS = [];
+const cx = 200, cy = 200;
+
+async function loadData() {
+  try {
+    const res = await fetch(docId);
+    const data = await res.json();
+    ITEMS = data.map((d, i) => ({
+      id: i + 1,
+      name: d.name,
+      quad: QUAD_MAP[d.quadrant.toLowerCase()] || d.quadrant,
+      ring: RING_MAP[d.ring.toLowerCase()] || d.ring,
+      desc: d.description,
+      isNew: d.isNew === 'TRUE' || (d.status || '').toLowerCase() === 'new',
+      status: d.status || '',
+      previousRing: d.previousRing ? RING_MAP[d.previousRing.toLowerCase()] : null,
+      links: Array.isArray(d.links) ? d.links.map(function(l) { return { label: l.label || '', url: l.url || '' }; }) : []
+    }));
+    document.getElementById('radarPanelTitle').textContent = 'Mapa do radar';
+    document.getElementById('radarItemCount').textContent = ITEMS.length + ' itens';
+    init();
+  } catch (e) {
+    document.getElementById('listPanel').innerHTML =
+      '<div style="text-align:center;padding:40px;color:var(--hold);font-size:13px;">Erro ao carregar dados do radar.</div>';
+  }
+}
+
+function ringMidRadius(ring){
+  const [a,b] = RINGS[ring].radius;
+  return (a+b)/2;
+}
+
+function placeItems(){
+  const counts = {};
+  ITEMS.forEach(it => {
+    const key = it.quad+'-'+it.ring;
+    counts[key] = (counts[key]||0)+1;
+  });
+  const seen = {};
+  return ITEMS.map(it => {
+    const key = it.quad+'-'+it.ring;
+    const idx = seen[key] = (seen[key]||0);
+    seen[key]++;
+    const total = counts[key];
+    const q = QUADRANTS[it.quad];
+    const span = q.angleEnd - q.angleStart;
+    const pad = span*0.18;
+    const t = total>1 ? (idx/(total-1)) : 0.5;
+    const angle = (q.angleStart+pad) + t*(span-pad*2);
+    const rad = angle*Math.PI/180;
+    const [r0,r1] = RINGS[it.ring].radius;
+    const radius = r0 + (r1-r0)*(0.3+0.4*((idx%3)/2));
+    const x = cx + Math.cos(rad)*radius;
+    const y = cy + Math.sin(rad)*radius;
+    return {...it, x, y};
+  });
+}
+
+let placedItems = [];
+let activeQuad = 'all';
+let activeRing = 'all';
+let activeId = null;
+
+function renderDots(){
+  const layer = document.getElementById('dotsLayer');
+  layer.innerHTML = '';
+  placedItems.forEach(it => {
+    const visible = (activeQuad==='all'||activeQuad===it.quad) && (activeRing==='all'||activeRing===it.ring);
+    const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.setAttribute('class','radar-dot'+(visible?'':' dim'));
+    g.dataset.id = it.id;
+    const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx', it.x); c.setAttribute('cy', it.y);
+    c.setAttribute('r', activeId===it.id ? 11 : 8);
+    c.setAttribute('fill', RINGS[it.ring].color);
+    c.setAttribute('stroke', RINGS[it.ring].dark);
+    c.setAttribute('stroke-width', activeId===it.id ? 2 : 1);
+    g.appendChild(c);
+    const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.setAttribute('class','radar-dot-label');
+    t.setAttribute('x', it.x); t.setAttribute('y', it.y+3);
+    t.setAttribute('text-anchor','middle');
+    t.textContent = it.id;
+    g.appendChild(t);
+    g.addEventListener('click', () => { activeId = it.id; renderDots(); scrollToItem(it.id); });
+    layer.appendChild(g);
+  });
+}
+
+function scrollToItem(id){
+  const el = document.querySelector('.item-card[data-id="'+id+'"]');
+  if(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); flashItem(id); }
+}
+
+function flashItem(id){
+  document.querySelectorAll('.item-card').forEach(c=>c.classList.remove('highlight'));
+  const el = document.querySelector('.item-card[data-id="'+id+'"]');
+  if(el) el.classList.add('highlight');
+}
+
+function getMovementBadge(it){
+  const ringColor = RINGS[it.ring].color;
+  const ringLabel = RINGS[it.ring].label;
+  if (it.isNew) {
+    return '<div class="item-move"><span style="color:'+ringColor+'">●</span> Novo</div>';
+  }
+  var s = (it.status || '').toLowerCase();
+  if (s === 'moved in' || s === 'moved out') {
+    if (it.previousRing && RINGS[it.previousRing]) {
+      return '<div class="item-move"><span style="color:'+ringColor+'">●</span> '+RINGS[it.previousRing].label+' → '+ringLabel+'</div>';
+    }
+    if (s === 'moved in') {
+      return '<div class="item-move"><span style="color:'+ringColor+'">●</span> Entrou em '+ringLabel+'</div>';
+    }
+    return '<div class="item-move"><span style="color:'+ringColor+'">●</span> Moveu-se</div>';
+  }
+  return '';
+}
+
+function renderLinks(container, links){
+  if (!links || links.length === 0) return;
+  var wrap = document.createElement('div');
+  wrap.className = 'item-links';
+  var maxVisible = 2;
+  var visible = links.slice(0, maxVisible);
+  var hidden = links.slice(maxVisible);
+  visible.forEach(function(l){
+    var a = document.createElement('a');
+    a.className = 'item-link';
+    a.href = l.url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = l.label;
+    wrap.appendChild(a);
+  });
+  if (hidden.length > 0) {
+    var moreBtn = document.createElement('button');
+    moreBtn.className = 'item-link-more';
+    moreBtn.textContent = '+'+hidden.length;
+    moreBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var hiddenDiv = wrap.querySelector('.item-links-hidden');
+      if (hiddenDiv) {
+        var isHidden = hiddenDiv.style.display === 'none';
+        hiddenDiv.style.display = isHidden ? 'inline' : 'none';
+        moreBtn.textContent = isHidden ? '−' : '+'+hidden.length;
+      }
+    });
+    wrap.appendChild(moreBtn);
+    var hiddenDiv = document.createElement('span');
+    hiddenDiv.className = 'item-links-hidden';
+    hiddenDiv.style.display = 'none';
+    hidden.forEach(function(l){
+      var a = document.createElement('a');
+      a.className = 'item-link';
+      a.href = l.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = l.label;
+      hiddenDiv.appendChild(a);
+    });
+    wrap.appendChild(hiddenDiv);
+  }
+  container.appendChild(wrap);
+}
+
+function renderList(){
+  const panel = document.getElementById('listPanel');
+  panel.innerHTML = '';
+  const query = document.getElementById('searchInput').value.trim().toLowerCase();
+
+  Object.keys(RINGS).forEach(ringKey => {
+    const ring = RINGS[ringKey];
+    let groupItems = ITEMS.filter(it => it.ring===ringKey);
+    if(activeQuad!=='all') groupItems = groupItems.filter(it => it.quad===activeQuad);
+    if(activeRing!=='all' && activeRing!==ringKey) return;
+    if(query) groupItems = groupItems.filter(it => it.name.toLowerCase().includes(query));
+    if(groupItems.length===0) return;
+
+    const group = document.createElement('div');
+    group.className = 'ring-group';
+    const head = document.createElement('div');
+    head.className = 'ring-group-head';
+    head.innerHTML = '<span class="ring-dot" style="background:'+ring.color+'"></span><h4>'+ring.label+'</h4><span>'+groupItems.length+' item'+(groupItems.length>1?'s':'')+'</span>';
+    group.appendChild(head);
+
+    groupItems.forEach(it => {
+      const card = document.createElement('div');
+      card.className = 'item-card';
+      card.dataset.id = it.id;
+      card.addEventListener('click', function(){ activeId = it.id; renderDots(); flashItem(it.id); });
+
+      const numDiv = document.createElement('div');
+      numDiv.className = 'item-num';
+      numDiv.style.background = ring.color;
+      numDiv.textContent = it.id;
+      card.appendChild(numDiv);
+
+      const body = document.createElement('div');
+      body.className = 'item-body';
+
+      const top = document.createElement('div');
+      top.className = 'item-top';
+
+      const nameP = document.createElement('p');
+      nameP.className = 'item-name';
+      nameP.textContent = it.name;
+      top.appendChild(nameP);
+
+      if (it.links && it.links.length > 0) {
+        const icon = document.createElement('span');
+        icon.className = 'item-link-icon';
+        icon.title = 'Possui documentação vinculada';
+        icon.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
+        top.appendChild(icon);
+      }
+
+      const quadSpan = document.createElement('span');
+      quadSpan.className = 'item-quad';
+      quadSpan.textContent = QUADRANTS[it.quad].label;
+      top.appendChild(quadSpan);
+
+      body.appendChild(top);
+
+      const descP = document.createElement('p');
+      descP.className = 'item-desc';
+      descP.textContent = it.desc;
+      body.appendChild(descP);
+
+      var moveHtml = getMovementBadge(it);
+      if (moveHtml) {
+        var moveDiv = document.createElement('div');
+        moveDiv.innerHTML = moveHtml;
+        body.appendChild(moveDiv.firstElementChild);
+      }
+
+      renderLinks(body, it.links);
+
+      card.appendChild(body);
+      group.appendChild(card);
+    });
+    panel.appendChild(group);
+  });
+
+  if(panel.children.length===0){
+    panel.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--ink-soft);font-size:13px;">Nenhum item encontrado para esse filtro.</div>';
+  }
+}
+
+function init() {
+  placedItems = placeItems();
+  document.querySelectorAll('.qbtn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.qbtn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      activeQuad = btn.dataset.q;
+      renderDots(); renderList();
+    });
+  });
+  document.querySelectorAll('.rbtn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.rbtn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      activeRing = btn.dataset.ring;
+      renderDots(); renderList();
+    });
+  });
+  document.getElementById('searchInput').addEventListener('input', renderList);
+  renderDots();
+  renderList();
+}
+
+loadData();
+</script>
+</body>
 </html>

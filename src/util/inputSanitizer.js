@@ -27,6 +27,16 @@ const InputSanitizer = function () {
     return processedBlip
   }
 
+  function sanitizeLinks(links) {
+    if (!Array.isArray(links)) return links
+    return links.map(function (link) {
+      return {
+        label: sanitizeHtml(link.label || '', restrictedOptions),
+        url: sanitizeHtml(link.url || '', restrictedOptions),
+      }
+    })
+  }
+
   var self = {}
   self.sanitize = function (rawBlip) {
     var blip = trimWhiteSpaces(rawBlip)
@@ -36,6 +46,8 @@ const InputSanitizer = function () {
     blip.status = sanitizeHtml(blip.status, restrictedOptions)
     blip.ring = sanitizeHtml(blip.ring, restrictedOptions)
     blip.quadrant = sanitizeHtml(blip.quadrant, restrictedOptions)
+    blip.previousRing = sanitizeHtml(blip.previousRing, restrictedOptions)
+    blip.links = sanitizeLinks(blip.links)
 
     return blip
   }
